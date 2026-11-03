@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BCS360 : Important Questions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+}
+
+header {
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color: white;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.question {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.question h3 {
+    margin-top: 0;
+    color: #2563eb;
+}
+
+audio {
+    width: 100%;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Important Questions</h1>
+    <p>With Answers & Audio Explanation</p>
+</header>
+
+<div class="container" id="questionContainer"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const subjectId = params.get("subjectId");
+
+const container = document.getElementById("questionContainer");
+
+if(!subjectId){
+    container.innerHTML = "<p>Invalid Subject</p>";
+}
+
+fetch(`/api/questions?subjectId=${subjectId}`)
+.then(res => res.json())
+.then(data => {
+
+    if(data.length === 0){
+        container.innerHTML = "<p>No questions found</p>";
+        return;
+    }
+
+    data.forEach((item, index) => {
+
+        const div = document.createElement("div");
+        div.className = "question";
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${item.question}</h3>
+            <p><strong>Answer:</strong> ${item.answer}</p>
+
+            ${item.audioPath ? `
+            <audio controls>
+                <source src="${item.audioPath}" type="audio/mpeg">
+            </audio>` : ''}
+        `;
+
+        container.appendChild(div);
+    });
+    
+    
+
+})
+.catch(err => {
+    console.error(err);
+    container.innerHTML = "<p>Error loading questions</p>";
+});
+
+</script>
+
+</body>
+</html>

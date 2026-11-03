@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BCS360 : Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>	
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+    color: #111827;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #f0f4f8;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.nav button, .nav a {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+header {
+    padding: 25px 20px;
+    text-align: center;
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.breadcrumb {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.card {
+    background: linear-gradient(135deg,#34d399,#059669);
+    border-radius: 18px;
+    padding: 35px 10px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+    <button onclick="history.back()">⬅ Back</button>
+    <a href="year.html">🏠 Dashboard</a>
+</div>
+
+<header>
+    <h1>Theory</h1>
+    <p>Textbook, Important Questions & Quiz</p>
+</header>
+
+<div class="breadcrumb" id="breadcrumb"></div>
+
+<div class="container">
+    <div class="grid">
+
+        <a id="textBookLink" class="card">
+            <div class="icon">📘</div>
+            Text Book PDF
+        </a>
+
+        <a id="impQuestionsLink" class="card">
+            <div class="icon">📝</div>
+            IMP Questions
+        </a>
+
+        <a id="quizLink" class="card">
+            <div class="icon">📌</div>
+            Quiz
+        </a>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 BCS360 – Smart Academic Growth System
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+//const year = params.get("year");
+//const semester = params.get("semester");
+const subjectId = params.get("subjectId");
+const name=params.get("name");
+console.log("Subject ID in theory:",subjectId);
+// breadcrumb
+document.getElementById("breadcrumb").innerHTML =
+`Subject > ${name} > Theory`;
+
+//links
+
+document.getElementById("textBookLink").href =
+`pdf-view.html?subjectId=${subjectId}`;
+
+document.getElementById("impQuestionsLink").href =
+`impquestions.html?subjectId=${subjectId}`;
+
+document.getElementById("quizLink").href =
+`quiz.html?subjectId=${subjectId}`;
+</script>
+
+</body>
+</html>

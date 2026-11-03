@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Question</title>
+
+<style>
+body {
+    font-family: Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+}
+
+.card {
+    background:white;
+    padding:30px;
+    width:350px;
+    border-radius:12px;
+}
+
+textarea, input {
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+}
+
+button {
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>Add Important Question</h2>
+
+<input type="number" id="subjectId" placeholder="Subject ID">
+
+<textarea id="question" placeholder="Enter Question"></textarea>
+
+<textarea id="answer" placeholder="Enter Answer"></textarea>
+
+<button onclick="addQuestion()">Add Question</button>
+</div>
+
+<script>
+
+function addQuestion(){
+
+    const data = {
+        subjectId: parseInt(document.getElementById("subjectId").value),
+        question: document.getElementById("question").value,
+        answer: document.getElementById("answer").value
+    };
+
+    fetch("/api/questions/add", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(result => {
+        alert(result);
+    });
+}
+
+</script>
+
+</body>
+</html>

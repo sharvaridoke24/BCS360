@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS360 : Select Year</title>
+
+<style>
+/* ---------- GLOBAL ---------- */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+    margin: 0;
+    color: #111827;
+    overflow: hidden;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    padding: 22px;
+    text-align: center;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: white;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 4px 0;
+    font-size: 15px;
+    opacity: 0.95;
+}
+
+/* ---------- BREADCRUMB ---------- */
+.breadcrumb {
+    padding: 10px 20px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+    padding: 25px;
+    max-width: 800px;
+    margin: auto;
+    filter: blur(5px);
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+/* ---------- GRID ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+/* ---------- CARDS ---------- */
+.card {
+    background: linear-gradient(135deg, #fbcfe8, #e9d5ff);
+    border-radius: 18px;
+    padding: 35px 0;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* ---------- MODAL ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffffff, #fdf2f8);
+    padding: 28px 30px;
+    border-radius: 18px;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #9333ea;
+}
+
+.modal-content p {
+    color: #374151;
+    margin: 15px 0 25px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+.modal button {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>BCS360 : SAGS</h1>
+    <p>Smart Academic Growth System</p>
+    <p>NEP 2024 Pattern</p>
+</header>
+
+<div class="breadcrumb">
+    NEP 2024 > Select Year
+</div>
+
+<div class="container" id="yearContainer">
+    <div class="grid">
+        <a href="semester.html?year=FY" class="card">
+            <div class="icon">📘</div>
+            FY BCS
+        </a>
+
+        <a href="semester.html?year=SY" class="card">
+            <div class="icon">📗</div>
+            SY BCS
+        </a>
+
+        <a href="semester.html?year=TY" class="card">
+            <div class="icon">📙</div>
+            TY BCS
+        </a>
+
+        <a href="semester.html?year=FINAL" class="card">
+            <div class="icon">📕</div>
+            Final Year BCS
+        </a>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="yearModal">
+    <div class="modal-content">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <h2>Notice</h2>
+        <p>This portal is only for BCS students of Pune University.</p>
+        <button id="modalOk">OK</button>
+    </div>
+</div>
+
+<script>
+const modal = document.getElementById("yearModal");
+const container = document.getElementById("yearContainer");
+const closeBtn = document.getElementById("modalClose");
+const okBtn = document.getElementById("modalOk");
+
+function closeModal() {
+    modal.style.display = "none";
+    container.style.filter = "none";
+    container.style.pointerEvents = "all";
+}
+
+closeBtn.onclick = closeModal;
+okBtn.onclick = closeModal;
+
+window.onclick = (e) => {
+    if (e.target === modal) closeModal();
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BCS360 : Practical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+    color: #111827;
+}
+
+/* ---------- NAVIGATION ---------- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #f0f4f8;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.nav button, .nav a {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.nav button:hover, .nav a:hover { background: #1e40af; }
+
+/* ---------- HEADER ---------- */
+header {
+    padding: 25px 20px;
+    text-align: center;
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+header h1 { margin: 0; font-size: 32px; }
+header p { margin-top: 6px; font-size: 16px; }
+
+/* ---------- BREADCRUMB ---------- */
+.breadcrumb {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ---------- GRID ---------- */
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.card {
+    background: linear-gradient(135deg,#34d399,#059669);
+    border-radius: 18px;
+    padding: 35px 10px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+}
+
+.icon { font-size: 40px; margin-bottom: 10px; }
+
+/* ---------- FOOTER ---------- */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button onclick="history.back()">⬅ Back</button>
+    <a href="year.html">🏠 Back to Dashboard</a>
+</div>
+
+<!-- HEADER -->
+<header>
+    <h1>Practical Programs</h1>
+    <p>Laboratory Exercises & Practical Questions</p>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb" id="breadcrumb"></div>
+
+<!-- CONTENT GRID -->
+<div class="container">
+    <div class="grid">
+        <!-- Redirect to practicalprograms.html -->
+        <a id="practicalProgramLink" class="card">
+            <div class="icon">💻</div>
+            Lab Book
+        </a>
+
+        <a id="practicalQLink" class="card" target="_blank">
+            <div class="icon">📌</div>
+            Solved Assignments
+        </a>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 BCS360 – Smart Academic Growth System
+</footer>
+
+<script>
+// Get URL parameters
+const params = new URLSearchParams(location.search);
+const year = params.get("year");
+const semester = params.get("semester");
+const subject = decodeURIComponent(params.get("subject"));
+
+// Breadcrumb
+document.getElementById("breadcrumb").innerHTML =
+`Year > ${year} > Semester ${semester} > ${subject} > Practical`;
+
+// Redirect Practical Programs card to practicalprograms.html with parameters
+document.getElementById("practicalProgramLink").href =
+`practicalprograms.html?year=${year}&semester=${semester}&subject=${encodeURIComponent(subject)}`;
+
+// Keep Practical Questions PDF links as before
+const safeSubject = subject.replace(/\s+/g, "_");
+document.getElementById("practicalQLink").href =
+`pdfs/${year}_${semester}_${safeSubject}_PracticalQ.pdf`;
+</script>
+
+</body>
+</html>

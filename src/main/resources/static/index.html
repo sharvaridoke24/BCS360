@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS360 : Smart Academic Growth System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#f5f7ff,#fff1f8);
+    color:#1f2937;
+}
+
+/* HERO SECTION */
+header{
+    padding:60px 20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:42px;
+    color:#4338ca;
+}
+
+header h1 span{
+    color:#ec4899;
+}
+
+header p{
+    margin-top:15px;
+    font-size:18px;
+    color:#4b5563;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* BUTTONS */
+.actions{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 28px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn-login{
+    background: linear-gradient(135deg,#6366f1,#4338ca);
+    color:white;
+}
+
+.btn-register{
+    background: linear-gradient(135deg,#f472b6,#ec4899);
+    color:white;
+}
+
+.btn-admin{
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color:white;
+}
+
+.btn:hover{
+    transform: translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* FEATURES */
+.features{
+    padding:50px 20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.features h2{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:35px;
+    color:#312e81;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:linear-gradient(135deg,#ffffff,#f8fafc);
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    margin:10px 0;
+    color:#4338ca;
+}
+
+.card p{
+    font-size:14px;
+    color:#6b7280;
+}
+
+/* FOOTER */
+footer{
+    padding:20px;
+    text-align:center;
+    font-size:14px;
+    color:#6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>BCS360 <span>: SAGS</span></h1>
+    <p>
+        Smart Academic Growth System developed exclusively for
+        <strong>BCS students of Savitribai Phule Pune University</strong>
+        following NEP 2024 curriculum.
+    </p>
+
+    <div class="actions">
+        <a href="login.html" class="btn btn-login">🎓 Student Login</a>
+        <a href="register.html" class="btn btn-register">📝 New Student Registration</a>
+        <a href="admin-login.html" class="btn btn-admin">🛡 Admin Login</a>
+    </div>
+</header>
+
+<section class="features">
+    <h2>Why Choose BCS360?</h2>
+
+    <div class="grid">
+        <div class="card">
+            <h3>NEP 2024 Pattern</h3>
+            <p>Fully aligned with latest NEP 2024 syllabus structure.</p>
+        </div>
+
+        <div class="card">
+            <h3>Unit-wise Study Material</h3>
+            <p>Organized notes for faster and smarter preparation.</p>
+        </div>
+
+        <div class="card">
+            <h3>Practical Programs</h3>
+            <p>Structured lab programs and solved assignments.</p>
+        </div>
+
+        <div class="card">
+            <h3>Important Questions</h3>
+            <p>Exam-oriented revision and important topics.</p>
+        </div>
+
+        <div class="card">
+            <h3>Audio Notes</h3>
+            <p>Learn while traveling with audio-based explanations.</p>
+        </div>
+
+        <div class="card">
+            <h3>Quiz System</h3>
+            <p>Test your understanding with interactive quizzes.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 BCS360 – Smart Academic Growth System | Academic Use Only
+</footer>
+
+</body>
+</html>

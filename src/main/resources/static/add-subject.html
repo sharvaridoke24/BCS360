@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Subject</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card {
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    width:320px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+input, select {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button {
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Add Subject</h2>
+
+<input type="text" id="name" placeholder="Subject Name">
+
+<select id="year">
+    <option value="FY">FY</option>
+    <option value="SY">SY</option>
+    <option value="TY">TY</option>
+    <option value="FINAL">FINAL</option>
+</select>
+
+<select id="semester">
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+    <option value="3">Semester 3</option>
+    <option value="4">Semester 4</option>
+    <option value="5">Semester 5</option>
+    <option value="6">Semester 6</option>
+    <option value="7">Semester 7</option>
+    <option value="8">Semester 8</option>
+</select>
+
+<button onclick="addSubject()">Add Subject</button>
+
+</div>
+
+<script>
+
+function addSubject(){
+
+    const data = {
+        name: document.getElementById("name").value,
+        year: document.getElementById("year").value,
+        semester: parseInt(document.getElementById("semester").value)
+    };
+
+    fetch("/api/subjects/add", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(result => {
+        alert(result);
+        document.getElementById("name").value = "";
+    })
+    .catch(err => {
+        alert("Error adding subject");
+        console.error(err);
+    });
+}
+
+</script>
+
+</body>
+</html>

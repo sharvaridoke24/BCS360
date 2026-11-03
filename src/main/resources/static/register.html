@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS360 : Student Registration</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#e0f2fe,#fef3c7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#1f2937;
+}
+
+.register-card{
+    background:white;
+    width:100%;
+    max-width:480px;
+    padding:35px 30px;
+    border-radius:22px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.register-card h1{
+    text-align:center;
+    font-size:30px;
+    background: linear-gradient(90deg,#2563eb,#9333ea);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.form-group{
+    margin-top:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    font-size:14px;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:2px solid #d1d5db;
+    font-size:14px;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+.register-btn{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:700;
+    color:white;
+    background: linear-gradient(135deg,#2563eb,#9333ea);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.register-btn:hover{
+    transform: translateY(-2px);
+}
+
+.footer-text{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.footer-text a{
+    color:#2563eb;
+    font-weight:600;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="register-card">
+
+    <h1>Student Registration</h1>
+
+    <form onsubmit="registerStudent(); return false;">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="fullName" required>
+        </div>
+
+        <div class="form-group">
+            <label>PRN(remember it for login)</label>
+            <input type="text" id="prn" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" required>
+        </div>
+
+        <button type="submit" class="register-btn">Register</button>
+
+    </form>
+
+    <div class="footer-text">
+        Already registered? <a href="login.html">Login here</a>
+    </div>
+
+</div>
+
+<script>
+function registerStudent(){
+
+    const data = {
+        fullName: document.getElementById("fullName").value,
+        prn: document.getElementById("prn").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value
+    };
+
+    fetch("/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(result => {
+        alert(result);
+        if(result.includes("successful")){
+            window.location.href = "login.html";
+        }
+    })
+    .catch(error => {
+        alert("Registration failed");
+        console.error(error);
+    });
+}
+</script>
+
+</body>
+</html>

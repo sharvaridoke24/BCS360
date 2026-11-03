@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS360 : Student Login</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#fdf2f8,#fce7f3);
+    color:#1f2937;
+}
+
+.login-card{
+    background:white;
+    padding:40px 35px;
+    width:360px;
+    border-radius:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.login-card h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:10px;
+    background: linear-gradient(90deg,#db2777,#9333ea);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.login-card p{
+    text-align:center;
+    color:#374151;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:6px;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:2px solid #d1d5db;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:#db2777;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background: linear-gradient(135deg,#ec4899,#be185d);
+    color:white;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+}
+
+.links{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.links a{
+    color:#db2777;
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+    <h2>Student Login</h2>
+    <p>BCS | Pune University (SPPU)</p>
+
+    <form onsubmit="loginStudent(); return false;">
+
+        <div class="form-group">
+            <label>PRN</label>
+            <input type="text" id="prn" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+
+    </form>
+
+    <div class="links">
+        <a href="register.html">New Student? Register</a>
+    </div>
+</div>
+
+<script>
+function loginStudent(){
+
+    const data = {
+        prn: document.getElementById("prn").value,
+        password: document.getElementById("password").value
+    };
+
+    fetch("/api/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(result => {
+        if(result.toLowerCase().includes("login")){
+            window.location.href = "year.html";
+        } else {
+            alert(result);
+        }
+    })
+    .catch(error => {
+        alert("Login failed");
+        console.error(error);
+    });
+}
+</script>
+
+</body>
+</html>

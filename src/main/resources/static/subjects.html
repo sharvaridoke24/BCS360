@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS360 : Subjects</title>
+
+<style>
+/* ---------- GLOBAL ---------- */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+    color: #111827;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    text-align: center;
+    padding: 35px 20px;
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color: white;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin-top: 8px;
+    font-size: 16px;
+    opacity: 0.95;
+}
+
+/* ---------- BREADCRUMB ---------- */
+.breadcrumb {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ---------- GRID CONTAINER ---------- */
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* ---------- SUBJECT CARD ---------- */
+.card {
+    background: linear-gradient(135deg, #f472b6, #db2777);
+    border-radius: 18px;
+    padding: 35px 10px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* ---------- NAVIGATION ---------- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #f0f4f8;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.nav button, .nav a {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.nav button:hover, .nav a:hover {
+    background: #1e40af;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button onclick="window.history.back()">⬅ Back</button>
+    <a href="year.html">🏠 Back to Dashboard</a>
+</div>
+
+<!-- HEADER -->
+<header>
+    <h1>BCS360 : SAGS</h1>
+    <p>Select Subject</p>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb" id="breadcrumb"></div>
+
+<!-- CONTENT GRID -->
+<div class="container">
+    <div class="grid" id="subjectGrid">
+        <!-- Subjects injected by JS -->
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 BCS360 – Smart Academic Growth System
+</footer>
+
+<script>
+// Read URL params
+const params = new URLSearchParams(window.location.search);
+const year = params.get("year");
+const semester = params.get("semester");
+
+
+
+// Breadcrumb
+document.getElementById("breadcrumb").innerHTML =
+`Year > ${year} > Semester ${semester} > Subjects`;
+
+//Grid
+const grid=document.getElementById("subjectGrid");
+
+//Fetch from backend
+fetch(`/api/subjects?year=${year}&semester=${semester}`)
+.then(response => response.json())
+.then(data => {
+
+    if(data.length === 0){
+        grid.innerHTML = "<p>No subjects found</p>";
+        return;
+    }
+
+    data.forEach(sub => {
+
+        const card = document.createElement("a");
+        card.className = "card";
+        card.href = `subject-options.html?subjectId=${sub.id}&name=${encodeURIComponent(sub.name)}&year=${year}&semester=${semester}`;
+        console.log("Subject clicked:",sub.id,sub.name);
+        card.innerHTML = `<div class="icon">📘</div>${capitalize(sub.name)}`;
+
+        grid.appendChild(card);
+    });
+
+})
+.catch(error => {
+    console.error(error);
+    grid.innerHTML = "<p>Error loading subjects</p>";
+});
+
+//Capitalize function
+function capitalize(text){
+	return text.replace(/\b\w/g, c=>c.toUpperCase());
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

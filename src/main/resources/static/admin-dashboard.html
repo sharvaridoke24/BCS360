@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+body {
+    margin:0;
+    font-family:"Segoe UI", sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#fdf2f8);
+}
+
+/* HEADER */
+header {
+    padding:20px;
+    text-align:center;
+    background: linear-gradient(135deg,#2563eb,#db2777);
+    color:white;
+}
+
+header h1 {
+    margin:0;
+}
+
+/* CONTAINER */
+.container {
+    max-width:700px;
+    margin:40px auto;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+}
+
+/* CARD */
+.card {
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-5px);
+}
+
+/* BUTTON */
+.btn {
+    display:block;
+    margin-top:15px;
+    padding:10px;
+    background:#2563eb;
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+    <p>Manage Subjects, Questions & Quiz</p>
+</header>
+
+<div class="container">
+
+    <!-- Add Subject -->
+    <div class="card">
+        <h3>Add Subject</h3>
+        <p>Create new subject</p>
+        <a href="add-subject.html" class="btn">Open</a>
+    </div>
+
+    <!-- Add Important Question -->
+    <div class="card">
+        <h3>Add Important Questions</h3>
+        <p>Add theory questions</p>
+        <a href="add-question.html" class="btn">Open</a>
+    </div>
+
+    <!-- Add Quiz -->
+    <div class="card">
+        <h3>Add Quiz</h3>
+        <p>Create MCQ questions</p>
+        <a href="add-quiz.html" class="btn">Open</a>
+    </div>
+
+    <!-- Logout -->
+    <div class="card">
+        <h3>Logout</h3>
+        <p>Exit admin panel</p>
+        <a href="index.html" class="btn">Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>
